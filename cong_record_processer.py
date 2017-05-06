@@ -188,7 +188,11 @@ def cr_processer(filePath1, filePath2, filePath3):
     
     return(congressional_record)
     
-# Call the function and have the script save a csv:  
-cr_processer(sys.argv[1], sys.argv[2], sys.argv[3]).to_csv('congressional_record.csv')
-print "You can find your csv in the cwd folder with the name congressional_record.csv"
+def main():
+	# Call the function and have the script save a csv:  
+	cr_processer(sys.argv[1], sys.argv[2], sys.argv[3]).to_csv('congressional_record.csv')
+	print "You can find your csv in the cwd folder with the name congressional_record.csv"
+	
+if __name__ == "__main__": main()
+
 
