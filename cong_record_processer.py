@@ -13,20 +13,17 @@ from dateutil import parser
 
 # In[162]:
 
-def cr_processer(filePath1, filePath2, filePath3):
+def cr_processer(filePath):
 
     """
-    INPUT: three filepaths 
-    1. to a .txt file of the daily Congressional Record put out by the US Congress. 
-    2. path to legislators-current.json.txt - get from google drive
-    3. path to legislators-historical.json.txt - get from google drive
-    OUTPUT: dataframe of the parsed data, containing congress#, date, what was said and the last names,
+    INPUT: filepath to a .txt file of the daily Congressional Record put out by the US Congress
+    OUTPUT: .csv of the parsed data, containing congress#, date, what was said and the last names,
     party affiliation, and state of who said it. Note that all legislators with duplicate last names
     have been remove for ease of analysis
     """
-        
+    
     #IF SYS.ARGV[1] DOESN'T WORK, USE 'FILEPATH' INSTEAD
-    with open (filePath1, "r") as myfile: data = myfile.read().replace('\n', '')
+    with open (filePath, "r") as myfile: data = myfile.read().replace('\n', '')
     
     # In[163]:
     
@@ -99,14 +96,14 @@ def cr_processer(filePath1, filePath2, filePath3):
     #REMOVE STRINGS THAT ARE OBVIOUSLY TOO SHORT
     remove = [len(x)<=30 for x in record['text']]
     record['remove'] = remove
-    record = record.drop(record[record.remove == True].index)
+    record = record.drop(record[record.remove==True].index)
     record = record.drop(['remove'], axis=1)
     
     
     # In[174]:
     
     #LOAD CURRENT LEGISLATOR INFORMATION
-    with open (filePath2, "r") as myfile:
+    with open ('C:\\Users\\Graham\\Documents\\STA 160\\legislators-current.json', "r") as myfile:
         current_legislators = json.load(myfile)
     
     
@@ -146,7 +143,7 @@ def cr_processer(filePath1, filePath2, filePath3):
     # In[183]:
     
     #LOAD PAST LEGISLATOR INFORMATION
-    with open (filePath3, "r") as myfile:
+    with open ('C:\\Users\\Graham\\Documents\\STA 160\\legislators-historical.json', "r") as myfile:
         lh = json.load(myfile)
     
     
@@ -176,19 +173,18 @@ def cr_processer(filePath1, filePath2, filePath3):
     
     # In[188]:
     
-    hleg_data = hleg_data.drop_duplicates(subset=['names'], keep = 'first')
+    hleg_data = hleg_data.drop_duplicates(subset=['names'], keep='first')
     
     
     # In[190]:
     
-    congressional_record = congressional_record.merge(hleg_data,on = 'names')
+    congressional_record = congressional_record.merge(hleg_data,on='names')
     
     
     # In[194]:
     
-    return(congressional_record)
+    return(congressional_record.to_csv('congressional_record.csv'))
     
-# Call the function and have the script save a csv:  
-cr_processer(sys.argv[1], sys.argv[2], sys.argv[3]).to_csv('congressional_record.csv')
-print "You can find your csv in the cwd folder with the name congressional_record.csv"
+    
+cr_processer(sys.argv[1])
 
