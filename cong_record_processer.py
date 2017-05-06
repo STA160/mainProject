@@ -12,18 +12,17 @@ from dateutil import parser
 
 
 # In[162]:
+def cr_processer(sys.argv[1]):
 
-def cr_processer(filePath):
-
-    """
-    INPUT: filepath to a .txt file of the daily Congressional Record put out by the US Congress
-    OUTPUT: .csv of the parsed data, containing congress#, date, what was said and the last names,
-    party affiliation, and state of who said it. Note that all legislators with duplicate last names
-    have been remove for ease of analysis
-    """
+   """
+   INPUT: filepath to a .txt file of the daily Congressional Record put out by the US Congress
+   OUTPUT: .csv of the parsed data, containing congress#, date, what was said and the last names,
+   party affiliation, and state of who said it. Note that all legislators with duplicate last names
+   have been remove for ease of analysis
+   """
     
     #IF SYS.ARGV[1] DOESN'T WORK, USE 'FILEPATH' INSTEAD
-    with open (filePath, "r") as myfile: data = myfile.read().replace('\n', '')
+    with open (sys.argv[1], "r") as myfile: data = myfile.read().replace('\n', '')
     
     # In[163]:
     
@@ -185,6 +184,3 @@ def cr_processer(filePath):
     
     return(congressional_record.to_csv('congressional_record.csv'))
     
-    
-cr_processer(sys.argv[1])
-
