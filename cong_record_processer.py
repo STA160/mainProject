@@ -10,6 +10,16 @@ import string
 import json
 from dateutil import parser
 
+def decodeText(text):
+	"""
+	Input: A chunk of text. 
+	Output: The encoded version of that chunk. 
+	"""
+	try:  
+		return text.decode('unicode_escape').encode('ascii','ignore')
+	except: # Special case where trouble encoding "\\" - file 2015-11-16
+		text = "".join([t + '\\\\' for t in text.split('\\')])
+		return text.decode('unicode_escape').encode('ascii','ignore')
 
 # In[162]:
 
@@ -66,8 +76,8 @@ def cr_processer(filePath1, filePath2, filePath3):
     
     # In[168]:
     
-    #REMOVE UNICODE
-    record['text'] = [s.decode('unicode_escape').encode('ascii','ignore') for s in record['text']]
+    #REMOVE UNICODE    
+    record['text'] = [decodeText(s) for s in record['text']]
     
     
     # In[169]:
