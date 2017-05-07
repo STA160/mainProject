@@ -64,7 +64,10 @@ def cr_processer(filePath1, filePath2, filePath3):
     # In[166]:
     
     #GET WHICH CONGRESS IT IS
-    congress = re.findall('[0-9]{3}[\s](?:th)', data)[0]
+    try: 
+		congress = re.findall('[0-9]{3}[\s](?:th)', data)[0]
+    except: # Catches special case in files like 2008-03-27
+		congress = re.findall('[0-9]{3}(?:th)', data)[0]
     congress = [congress]*len(names)
     congress = [x[0:3] for x in congress]
     
