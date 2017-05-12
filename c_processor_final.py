@@ -145,7 +145,7 @@ def cr_processer(filePath1, filePath2, filePath3):
     
     # In[91]:
     
-    start_year = [cl[x]['terms'][0]['start'][0:4] for x in range(len(cl))]
+    start_year = [current_legislators[x]['terms'][0]['start'][0:4] for x in range(len(cl))]
     
     
     # In[92]:
