@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
-from cong_record_processer import cr_processer
-from cong_record_processer import decodeText
+from c_processor_final import cr_processer
+from c_processor_final import decodeText
 import sys
 import os
 import pandas as pd
