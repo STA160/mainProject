@@ -9,7 +9,6 @@ import re
 import string
 import json
 from dateutil import parser
-from textblob import TextBlob
 
 
 # In[1]:
@@ -107,7 +106,7 @@ def cr_processer(filePath1, filePath2, filePath3):
     #REMOVE EXCESS SPACES
     record['text'] = [re.sub(r'[[:space]]{2,}', ' ', x) for x in record['text']]
     record['text'] = [' '.join(word for word in x.split() if len(word)>3) for x  in record['text']]
-    record['text'] = [TextBlob(x) for x in record['text']]
+    
 
 # In[13]:
 
