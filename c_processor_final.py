@@ -217,7 +217,7 @@ def cr_processer(filePath1, filePath2, filePath3):
     
     c_record = record.merge(ld, on='names', how='left')
 
-    return(congressional_record)
+    return(c_record)
 
 # In[119]:
     
