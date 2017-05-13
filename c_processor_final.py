@@ -80,8 +80,7 @@ def cr_processer(filePath1, filePath2, filePath3):
 # In[8]:
 
     #REMOVE UNICODE
-    record['text'] = [s.decode('unicode_escape').encode('ascii','ignore') for s in record['text']]
-
+    record['text'] = [decodeText(s) for s in record['text']]
 
 # In[9]:
 
