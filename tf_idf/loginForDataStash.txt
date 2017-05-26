@@ -1,0 +1,6 @@
+## This is a public server under the Department of Energy serving its purpose to host files for the STA 160 project 
+## 
+##
+server : arvin.creacompute.lbl.gov
+user name : cong_sftp
+password : congress
