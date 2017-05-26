@@ -167,7 +167,7 @@ processDatedRecordsOfCongress <- function(df)
 	
 	
 	#State
-	tData <- returnTfCongressDataParty(mainData)
+	tData <- returnTfCongressDataState(mainData)
 	tString <- paste(df$year,"TF_IDF_STATE.TXT")
 	write.csv(tData,tString);
 	
