@@ -127,7 +127,7 @@ returnSentCongressDataParty <- function(df)
 
 }
  
-returnSentCongressDareturnSentCongressDataState <- function(df)
+returnSentCongressDataState <- function(df)
 {
 
 	 if (is.character(df$text) == FALSE)
@@ -206,7 +206,7 @@ returnSentCongressDataDate <- function(df)
 }
  
  
-returnSentCongressDataNames <- function(df)
+returnSentCongressDataName <- function(df)
 {
 
 	 if (is.character(df$text) == FALSE)
@@ -277,7 +277,7 @@ processSentimentDatedRecordsOfCongress <- function(df)
 	
 	
 	#State
-	tData <- returnSentCongressDataParty(mainData)
+	tData <- returnSentCongressDataState(mainData)
 	tString <- paste(df$year,"SENT_STATE.TXT")
 	write.csv(tData,tString);
 	
