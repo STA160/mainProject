@@ -72,7 +72,7 @@ processSentimentCongress <- function(df)
 	data("stop_words")
 	cleaned_tempData <- tidy_tempData %>% anti_join(stop_words)
 	sentiment_tempData  <- cleaned_tempData %>%
-	inner_join(bing) %>%
+	inner_join(mainSentimentSet) %>%
 	count(names,  sentiment, sort = TRUE) %>%
 #~   count(date,  sentiment, sort = TRUE) %>%
 #~   count(party,  sentiment, sort = TRUE) %>%
