@@ -1,54 +1,18 @@
+# used to detect sentiment using the bing language library in tidytext
+#  
+#  
+#  
+# Randy
+
 library(dplyr);library(tidytext);library(stringr);library(tidyr)
 
 
-#~ t_Joy <- get_sentiments("nrc") 
-#~ t_Bing <- get_sentiments("bing") 
-#~ t_Afinn <- get_sentiments("afinn")
-
-
-  
-#~   <- cleaned2017Data %>%
-#~   inner_join(bing) %>%
-#~   count(names,  sentiment, sort = TRUE) %>%
-#~   count(date,  sentiment, sort = TRUE) %>%
-#~   count(party,  sentiment, sort = TRUE) %>%
-#~   count(state,  sentiment, sort = TRUE) %>%
-#~   count(congress,  sentiment, sort = TRUE) %>%
-#~   spread(sentiment, n, fill = 0) %>%
-#~   mutate(sentiment = positive - negative)
-  
-  
-#~   processSentimentCongress
-  
-  
-#~     returnTfCongressDataState <- function(df)
-#~  {
-#~ 	 if (is.character(df$text) == FALSE)
-#~ 	 {
-#~ 		 innerDf <- as.character(df)
-#~ 	 }
-#~ 	 else
-#~ 	 {
-#~ 		innerDf <- df
-#~ 	}
-	
-#~ #word_tempData <- cleaned_tempData %>% count(state,word, sort = TRUE) 	 
-#~ #totalword_tempData <- word_tempData %>% group_by(state) %>% summarize(total = sum(n))
-#~   word_tempData <- left_join(word_tempData,totalword_tempData)
-#~   word_tempData <- word_tempData %>% bind_tf_idf(word,state,n)
-#~   word_tempData <- word_tempData %>% select(-total) %>% arrange(desc(tf_idf))
-  
-#~ 	 return(word_tempData)
-	 
-	 
-#~  }
- 
- 
- 
  
 returnSentCongressData <- function(df)
 {
 
+
+	#this is a redundant function right here
 	 if (is.character(df$text) == FALSE)
 	 {
 		 innerDf <- as.character(df)
@@ -163,7 +127,7 @@ returnSentCongressDataParty <- function(df)
 
 }
  
-returnSentCongressDataState <- function(df)
+returnSentCongressDareturnSentCongressDataState <- function(df)
 {
 
 	 if (is.character(df$text) == FALSE)
@@ -281,3 +245,58 @@ returnSentCongressDataNames <- function(df)
 
 }
  
+
+
+##Computations begine here:: 
+
+processSentimentDatedRecordsOfCongress <- function(df)
+{
+	mainData <- read.csv(df$file)
+	mainData$text <- as.character(mainData$text)	
+	
+	#name
+	tData <- returnSentCongressDataName(mainData)
+	tString <- paste(df$year,"SENT_NAME.TXT")
+	write.csv(tData,tString);
+	
+	#date
+	tData <- returnSentCongressDataDate(mainData)
+	tString <- paste(df$year,"SENT_DATE.TXT")
+	write.csv(tData,tString);
+	
+	#Congress
+	tData <- returnSentCongressDataCongress(mainData)
+	tString <- paste(df$year,"SENT_CONGRESS.TXT")
+	write.csv(tData,tString);
+	
+	
+	#Party
+	tData <- returnSentCongressDataParty(mainData)
+	tString <- paste(df$year,"SENT_PARTY.TXT")
+	write.csv(tData,tString);
+	
+	
+	#State
+	tData <- returnSentCongressDataParty(mainData)
+	tString <- paste(df$year,"SENT_STATE.TXT")
+	write.csv(tData,tString);
+	
+	
+	
+	
+	rm(mainData)
+}
+ 
+#processDatedRecordsOfCongress(tmp)
+
+ dateFile <- read.csv("dateAndFileList.csv")
+ dateFile$file <- as.character(dateFile$file)
+ dateFile$year <- as.character(dateFile$year)
+
+
+for (val in 1:nrow(dateFile))
+{
+	
+	
+	processSentimentDatedRecordsOfCongress(dateFile[val,])
+} 
