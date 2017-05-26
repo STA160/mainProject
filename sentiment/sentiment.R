@@ -1,4 +1,4 @@
-library(dplyr);library(tidytext);library(stringr)
+library(dplyr);library(tidytext);library(stringr);library(tidyr)
 
 
 #~ t_Joy <- get_sentiments("nrc") 
@@ -46,7 +46,7 @@ library(dplyr);library(tidytext);library(stringr)
  
  
  
-processSentimentCongress <- function(df)
+returnSentCongressData <- function(df)
 {
 
 	 if (is.character(df$text) == FALSE)
@@ -74,10 +74,206 @@ processSentimentCongress <- function(df)
 	sentiment_tempData  <- cleaned_tempData %>%
 	inner_join(mainSentimentSet) %>%
 	count(names,  sentiment, sort = TRUE) %>%
-#~   count(date,  sentiment, sort = TRUE) %>%
-#~   count(party,  sentiment, sort = TRUE) %>%
-#~   count(state,  sentiment, sort = TRUE) %>%
-#~   count(congress,  sentiment, sort = TRUE) %>%
+	#~   count(date,  sentiment, sort = TRUE) %>%
+	#~   count(party,  sentiment, sort = TRUE) %>%
+	#~   count(state,  sentiment, sort = TRUE) %>%
+	#~   count(congress,  sentiment, sort = TRUE) %>%
+	spread(sentiment, n, fill = 0) %>%
+	mutate(sentiment = positive - negative)
+
+	return(sentiment_tempData) 	
+
+}
+ 
+returnSentCongressDataCongress <- function(df)
+{
+
+	 if (is.character(df$text) == FALSE)
+	 {
+		 innerDf <- as.character(df)
+	 }
+	 else
+	 {
+		innerDf <- df
+	}
+
+	returnObject <- "" #creating an object #probably wont be used in current incarnation 
+#~ 	t_Joy <- get_sentiments("nrc") 
+	mainSentimentSet <-	t_Bing <- get_sentiments("bing") 
+#~ 	t_Afinn <- get_sentiments("afinn")
+
+
+	
+
+	#sentiments 
+	
+	tidy_tempData <- innerDf %>% unnest_tokens(word, text)
+	data("stop_words")
+	cleaned_tempData <- tidy_tempData %>% anti_join(stop_words)
+	sentiment_tempData  <- cleaned_tempData %>%
+	inner_join(mainSentimentSet) %>%
+#~ 	count(names,  sentiment, sort = TRUE) %>%
+	#~   count(date,  sentiment, sort = TRUE) %>%
+	#~   count(party,  sentiment, sort = TRUE) %>%
+	#~   count(state,  sentiment, sort = TRUE) %>%
+	  count(congress,  sentiment, sort = TRUE) %>%
+	spread(sentiment, n, fill = 0) %>%
+	mutate(sentiment = positive - negative)
+
+	return(sentiment_tempData) 	
+
+}
+ 
+returnSentCongressDataParty <- function(df)
+{
+
+	 if (is.character(df$text) == FALSE)
+	 {
+		 innerDf <- as.character(df)
+	 }
+	 else
+	 {
+		innerDf <- df
+	}
+
+	returnObject <- "" #creating an object #probably wont be used in current incarnation 
+#~ 	t_Joy <- get_sentiments("nrc") 
+	mainSentimentSet <-	t_Bing <- get_sentiments("bing") 
+#~ 	t_Afinn <- get_sentiments("afinn")
+
+
+	
+
+	#sentiments 
+	
+	tidy_tempData <- innerDf %>% unnest_tokens(word, text)
+	data("stop_words")
+	cleaned_tempData <- tidy_tempData %>% anti_join(stop_words)
+	sentiment_tempData  <- cleaned_tempData %>%
+	inner_join(mainSentimentSet) %>%
+#~ 	count(names,  sentiment, sort = TRUE) %>%
+	#~   count(date,  sentiment, sort = TRUE) %>%
+	  count(party,  sentiment, sort = TRUE) %>%
+	#~   count(state,  sentiment, sort = TRUE) %>%
+	#~   count(congress,  sentiment, sort = TRUE) %>%
+	spread(sentiment, n, fill = 0) %>%
+	mutate(sentiment = positive - negative)
+
+	return(sentiment_tempData) 	
+
+}
+ 
+returnSentCongressDataState <- function(df)
+{
+
+	 if (is.character(df$text) == FALSE)
+	 {
+		 innerDf <- as.character(df)
+	 }
+	 else
+	 {
+		innerDf <- df
+	}
+
+	returnObject <- "" #creating an object #probably wont be used in current incarnation 
+#~ 	t_Joy <- get_sentiments("nrc") 
+	mainSentimentSet <-	t_Bing <- get_sentiments("bing") 
+#~ 	t_Afinn <- get_sentiments("afinn")
+
+
+	
+
+	#sentiments 
+	
+	tidy_tempData <- innerDf %>% unnest_tokens(word, text)
+	data("stop_words")
+	cleaned_tempData <- tidy_tempData %>% anti_join(stop_words)
+	sentiment_tempData  <- cleaned_tempData %>%
+	inner_join(mainSentimentSet) %>%
+#~ 	count(names,  sentiment, sort = TRUE) %>%
+	#~   count(date,  sentiment, sort = TRUE) %>%
+	#~   count(party,  sentiment, sort = TRUE) %>%
+	  count(state,  sentiment, sort = TRUE) %>%
+	#~   count(congress,  sentiment, sort = TRUE) %>%
+	spread(sentiment, n, fill = 0) %>%
+	mutate(sentiment = positive - negative)
+
+	return(sentiment_tempData) 	
+
+}
+ 
+returnSentCongressDataDate <- function(df)
+{
+
+	 if (is.character(df$text) == FALSE)
+	 {
+		 innerDf <- as.character(df)
+	 }
+	 else
+	 {
+		innerDf <- df
+	}
+
+	returnObject <- "" #creating an object #probably wont be used in current incarnation 
+#~ 	t_Joy <- get_sentiments("nrc") 
+	mainSentimentSet <-	t_Bing <- get_sentiments("bing") 
+#~ 	t_Afinn <- get_sentiments("afinn")
+
+
+	
+
+	#sentiments 
+	
+	tidy_tempData <- innerDf %>% unnest_tokens(word, text)
+	data("stop_words")
+	cleaned_tempData <- tidy_tempData %>% anti_join(stop_words)
+	sentiment_tempData  <- cleaned_tempData %>%
+	inner_join(mainSentimentSet) %>%
+#~ 	count(names,  sentiment, sort = TRUE) %>%
+	  count(date,  sentiment, sort = TRUE) %>%
+	#~   count(party,  sentiment, sort = TRUE) %>%
+	#~   count(state,  sentiment, sort = TRUE) %>%
+	#~   count(congress,  sentiment, sort = TRUE) %>%
+	spread(sentiment, n, fill = 0) %>%
+	mutate(sentiment = positive - negative)
+
+	return(sentiment_tempData) 	
+
+}
+ 
+ 
+returnSentCongressDataNames <- function(df)
+{
+
+	 if (is.character(df$text) == FALSE)
+	 {
+		 innerDf <- as.character(df)
+	 }
+	 else
+	 {
+		innerDf <- df
+	}
+
+	returnObject <- "" #creating an object #probably wont be used in current incarnation 
+#~ 	t_Joy <- get_sentiments("nrc") 
+	mainSentimentSet <-	t_Bing <- get_sentiments("bing") 
+#~ 	t_Afinn <- get_sentiments("afinn")
+
+
+	
+
+	#sentiments 
+	
+	tidy_tempData <- innerDf %>% unnest_tokens(word, text)
+	data("stop_words")
+	cleaned_tempData <- tidy_tempData %>% anti_join(stop_words)
+	sentiment_tempData  <- cleaned_tempData %>%
+	inner_join(mainSentimentSet) %>%
+	count(names,  sentiment, sort = TRUE) %>%
+	#~   count(date,  sentiment, sort = TRUE) %>%
+	#~   count(party,  sentiment, sort = TRUE) %>%
+	#~   count(state,  sentiment, sort = TRUE) %>%
+	#~   count(congress,  sentiment, sort = TRUE) %>%
 	spread(sentiment, n, fill = 0) %>%
 	mutate(sentiment = positive - negative)
 
