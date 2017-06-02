@@ -1,0 +1,12 @@
+2006 TF_IDF_PARTY.TXT 2006.sortedOutput.txt
+2007 TF_IDF_PARTY.TXT 2007.sortedOutput.txt
+2008 TF_IDF_PARTY.TXT 2008.sortedOutput.txt
+2009 TF_IDF_PARTY.TXT 2009.sortedOutput.txt
+2010 TF_IDF_PARTY.TXT 2010.sortedOutput.txt
+2011 TF_IDF_PARTY.TXT 2011.sortedOutput.txt
+2012 TF_IDF_PARTY.TXT 2012.sortedOutput.txt
+2013 TF_IDF_PARTY.TXT 2013.sortedOutput.txt
+2014 TF_IDF_PARTY.TXT 2014.sortedOutput.txt
+2015 TF_IDF_PARTY.TXT 2015.sortedOutput.txt
+2016 TF_IDF_PARTY.TXT 2016.sortedOutput.txt
+2017 TF_IDF_PARTY.TXT 2017.sortedOutput.txt
