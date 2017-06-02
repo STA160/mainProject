@@ -18,7 +18,7 @@ my @splitArray;
 
 for ( my $date = 2006; $date < 2018; $date++)
 {
-	open('FILE',"> $date.sortedOutput.txt"); #open the fd or die
+	open('FILE',"> $date.sortedOutput.csv"); #open the fd or die
 	
 	print FILE ",congress,date,end_year,names,party,start_year,state,text\n"; 
 	
