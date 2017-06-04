@@ -55,7 +55,8 @@ def tfidfDiffs(filepath1, filepath2):
 
 def main():
 	# Call the function and have the script save a csv:  
-	tfidfDiffs(sys.argv[1], sys.argv[2]).to_csv('cong_record_tfidfDiff.csv')
+	#~ tfidfDiffs(sys.argv[1], sys.argv[2]).to_csv('cong_record_tfidfDiff.csv')
+	tfidfDiffs(sys.argv[1], sys.argv[2]).to_csv(sys.argv[1] + '_' + 'cong_record_tfidfDiff.csv')	#changed this for parallel processing -Randy
 	print "You can find your csv in the cwd folder with the name cong_record_tfidfDiff.csv"
 	
 if __name__ == "__main__": main()
