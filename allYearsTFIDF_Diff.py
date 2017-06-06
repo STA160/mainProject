@@ -24,6 +24,11 @@ def main():
 		# Combine each year:
 		tfDiff = tfDiff.append(tfDiffYear)
 		
+	# Normalize tfidf diffs:
+	minDiff = min(tfDiff['tfidfd'])
+	maxDiff = max(tfDiff['tfidfd'])
+	tfDiff['tfidf_norm'] = [2*((x - minDiff)/(maxDiff - minDiff)) - 1 for x in tfDiff['tfidfd']]		
+	
 	# Save to a csv:
 	tfDiff.to_csv("allYearsTFIDF_Diff.csv")
 	print "You can find your csv in the cwd folder with the name allYearsTFIDF_Diff.csv"
