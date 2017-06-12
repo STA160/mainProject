@@ -24,9 +24,6 @@ def decodeText(text):
         text = "".join([t + '\\\\' for t in text.split('\\')])
         return text.decode('unicode_escape').encode('ascii','ignore')
 
-
-# In[2]:
-
 def cr_processer(filePath1, filePath2, filePath3):
 
     """
