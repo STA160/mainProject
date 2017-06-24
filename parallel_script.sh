@@ -1,4 +1,6 @@
 #!/bin/sh
+#this script runs gnu parallel to use the delta tf-idf script in parallel so it doesn't take a day to finish. The more cores the better. also mmore memory is better too
+
 echo "converting all tf idf filename spaces to underscores for unix sakes"
 
 mv "2006 TF_IDF_PARTY.TXT" 2006_TF_IDF_PARTY.TXT 

@@ -24,9 +24,6 @@ def decodeText(text):
         text = "".join([t + '\\\\' for t in text.split('\\')])
         return text.decode('unicode_escape').encode('ascii','ignore')
 
-
-# In[2]:
-
 def cr_processer(filePath1, filePath2, filePath3):
 
     """
@@ -215,8 +212,6 @@ def cr_processer(filePath1, filePath2, filePath3):
     c_record = record.merge(ld, on='names', how='left')
 
     return(c_record)
-
-# In[119]:
     
 def main():
 	# Call the function and have the script save a csv:  
